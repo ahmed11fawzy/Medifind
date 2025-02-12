@@ -1,21 +1,13 @@
 const express = require('express')
-const router= express.Router()
- 
-//ay 7aga
+const medicineRouter = express.Router()
+const { medicineDataValidation } = require('../Validators/medicineValidation/midicineValidation.js')
+const { createMedicine } = require('../Controllers/medicineController.service.js')
 
-router.route('/addMedicine')
-    .get((req, res,next) => {
-        res.json({ data: [{},{},{}] })
-        
-    })
-    .post((req, res,next) => {
-        res.json({ message: "medicine added" })   
-    })  
-    
+medicineRouter.post("/medicine", medicineDataValidation, createMedicine)
 
 
 
 
 
-module.exports = router
+module.exports = medicineRouter
 

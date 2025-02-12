@@ -3,7 +3,7 @@ const Router = require('./Router/UserRouter.service.js')
 const server = express()
 const mongoose = require('mongoose')
 const cors = require('cors');
-
+const medicineRouter = require('./Router/medicineRouter.service.js')
 
 mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongodb.net/MediFind').then(async (data) => {
     console.log('db connected');
@@ -52,7 +52,7 @@ server.use(express.json())
 
 // $4- Routing middleware
 server.use(Router)
-
+server.use(medicineRouter)
 
 
 // $5-middleware
