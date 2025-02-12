@@ -1,5 +1,5 @@
 const medicineModel = require('../models/medicine.model.js')
-const mongoose = require('mongoose')
+
 
 
 module.exports = {

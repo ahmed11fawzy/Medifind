@@ -1,5 +1,4 @@
 const Ajv = require('ajv').default
-const mongoose = require('mongoose')
 const ajv = new Ajv()
 
 const medicineSchema = {

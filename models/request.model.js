@@ -1,15 +1,24 @@
 const mongoose = require('mongoose')
-
 const requestSchema = new mongoose.Schema({
 
-    _id: mongoose.Schema.Types.ObjectId,
-    req_name: String,
-    prescription_img: String,
-    status: Boolean,
+    req_name: {
+        type: String,
+        required: true
+    },
+    prescription_img: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: Boolean,
+        required: false
+    },
     req_date: Date,
     doctor_id: mongoose.Schema.Types.ObjectId,
     user_id: mongoose.Schema.Types.ObjectId
 
-}, { collection: 'Medicine' })
+}, { collection: 'request' })
 
 const Request = mongoose.model('request', requestSchema)
+
+module.exports = Request
