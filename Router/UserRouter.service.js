@@ -4,8 +4,8 @@ const { insertedUserErrors } = require('../Validators/UserValidations/validation
 const { getHomePage, getUsers, createUser, userUpdated, getSpecificUser } = require('../Controllers/UserController.service.js')
 Router.get('/', getHomePage)
     .get('/users', getUsers)
-    .patch('/user/:id', userId, insertedUserErrors, userUpdated)
-    .post('/user', signUpDataValidation, checkUserNotExists, insertedUserErrors, createUser)
-    .post('/login', loginDataValidation, checkUserExists, insertedUserErrors, getSpecificUser)
+    .patch('/user/:id', userId, insertedUserErrors, userUpdated)                                  // dpdate ypur profile (add more information)
+    .post('/user', signUpDataValidation, checkUserNotExists, insertedUserErrors, createUser)     //register
+    .post('/login', loginDataValidation, checkUserExists, insertedUserErrors, getSpecificUser)  //login
 
 module.exports = Router

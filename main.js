@@ -2,6 +2,16 @@ const express = require('express')
 const Router = require('./Router/UserRouter.service.js')
 const server = express()
 const mongoose = require('mongoose')
+
+
+const cors = require('cors');
+server.use(
+    cors({
+    exposedHeaders: ["x-auth-token"], 
+}) // Allow all origins
+
+);
+
 mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongodb.net/MediFind').then(async (data) => {
     console.log('db connected');
     const collections = await data.connection.db.listCollections().toArray();
