@@ -2,15 +2,8 @@ const express = require('express')
 const Router = require('./Router/UserRouter.service.js')
 const server = express()
 const mongoose = require('mongoose')
-
-
 const cors = require('cors');
-server.use(
-    cors({
-    exposedHeaders: ["x-auth-token"], 
-}) // Allow all origins
 
-);
 
 mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongodb.net/MediFind').then(async (data) => {
     console.log('db connected');
@@ -36,8 +29,15 @@ mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongod
 // Handle server middleware
 
 
-// $1-middleware  
+
+
+
+// $1-middleware   // Allow all origins
+
 server.use((req, res, next) => {
+    cors({
+        exposedHeaders: ["x-auth-token"],
+    })
     console.log('logging Mw 1');
     next()
 })
