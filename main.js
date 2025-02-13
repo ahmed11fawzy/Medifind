@@ -3,6 +3,11 @@ const Router = require('./Router/UserRouter.service.js')
 const server = express()
 const mongoose = require('mongoose')
 const cors = require('cors');
+
+server.use(cors());
+
+
+
 const medicineRouter = require('./Router/medicineRouter.service.js')
 const requestRouter = require('./Router/requestRouter.service.js')
 const reviewRouter = require('./Router/reviewRouter.service.js')
@@ -13,8 +18,6 @@ mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongod
     server.listen(7777, () => {
         console.log('server is running on port 7777');
     })
-
-
 
 })
     .catch((err) => {
