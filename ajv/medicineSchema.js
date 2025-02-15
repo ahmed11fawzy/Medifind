@@ -11,7 +11,7 @@ const medicineSchema = {
         expire_date: { type: 'string' },
         user_id: { type: 'string' },
     },
-    required: ['name', 'image_path', 'concentration', 'user_id'],
+    required: ['name','concentration'],
     additionalProperties: false
 }
 

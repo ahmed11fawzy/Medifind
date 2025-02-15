@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const medicineSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
         unique: true
     },
     image_path: {

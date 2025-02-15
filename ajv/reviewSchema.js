@@ -6,7 +6,7 @@ const reviewSchema = {
     type: 'object',
     properties: {
         status: { type: 'boolean' },
-        examined: { type: 'boolean' },
+        examined: { type: 'boolean' },  //
         doctor_id: { type: 'string' },
         medicine_id: { type: 'string' },
     },
