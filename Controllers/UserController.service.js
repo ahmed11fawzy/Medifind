@@ -31,13 +31,13 @@ module.exports = {
 
         await user.save()
 
-        res.json({ message: "user created" })
+        res.status(200).json({ message: "user created" })
     },
     userUpdated: async (req, res) => {
         console.log(req.params);
         await userModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
-        res.json({ message: "user updated" })
+        res.status(200).json({ message: "user updated" })
     },
     getSpecificUser: async (req, res, next) => {
 

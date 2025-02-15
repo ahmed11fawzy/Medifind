@@ -1,16 +1,22 @@
 const mongoose = require('mongoose')
-
 const reviewSchema = new mongoose.Schema({
 
-      status: {
+    status: {
         type: Boolean,
         required: false
     },
-    examined: {  type: Boolean,
-                 required: false
-             },
-    doctor_id: mongoose.Schema.Types.ObjectId,
-    medicine_id: mongoose.Schema.Types.ObjectId
+    examined: {
+        type: Boolean,
+        required: false
+    },
+    doctor_id: {
+        type: mongoose.ObjectId,
+        ref: 'doctors'
+    },
+    medicine_id: {
+        type: mongoose.ObjectId,
+        ref: 'medicine'
+    }
 
 }, { collection: 'review' })
 
