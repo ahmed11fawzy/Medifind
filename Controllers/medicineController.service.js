@@ -21,6 +21,17 @@ module.exports = {
             .catch((err) => {
                 next(err)
             })
+    },
+
+    getMedicine: (req, res, next) => {   //added getAllMedicines
+        medicineModel.find()
+            .then((allMedicine) => {
+                console.log(allMedicine);
+                res.status(200).json(allMedicine); //  Returns an array directly
+            })
+            .catch((err) => {
+                next(err);
+            });
     }
 
 }

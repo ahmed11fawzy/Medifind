@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { required } = require('../ajv/loginSchema')
 const requestSchema = new mongoose.Schema({
 
     req_name: {
@@ -7,13 +8,20 @@ const requestSchema = new mongoose.Schema({
     },
     prescription_img: {
         type: String,
+        // required: true
+    },
+    req_description: {
+        type: String,
         required: true
     },
     status: {
         type: Boolean,
         required: false
     },
-    req_date: Date,
+    req_date: {
+        type: Date,
+        required: false
+    },      //is it required or not?
     doctor_id: mongoose.Schema.Types.ObjectId,
     user_id: mongoose.Schema.Types.ObjectId
 
