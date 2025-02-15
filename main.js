@@ -6,6 +6,7 @@ const cors = require('cors');
 const medicineRouter = require('./Router/medicineRouter.service.js')
 const requestRouter = require('./Router/requestRouter.service.js')
 const reviewRouter = require('./Router/reviewRouter.service.js')
+server.use(cors())
 mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongodb.net/MediFind').then(async (data) => {
     console.log('db connected');
     const collections = await data.connection.db.listCollections().toArray();

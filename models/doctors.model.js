@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 
 const doctorSchema = new mongoose.Schema({
-     _id: mongoose.Schema.Types.ObjectId,
+    _id: mongoose.Schema.Types.ObjectId,
     name: String,
     password: String,
     email: String,
     authirty_id: Number
 }, { collection: 'doctors' })
 
-const doctor = mongoose.model('doctors', doctorSchema)
+const Doctor = mongoose.model('Doctor', doctorSchema)
 
-module.exports = doctor
+module.exports = Doctor

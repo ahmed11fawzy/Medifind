@@ -3,16 +3,22 @@ const mongoose = require('mongoose')
 
 const donationSchema = new mongoose.Schema({
 
-    donation_id: mongoose.Schema.Types.ObjectId,
+    donation_id: mongoose.ObjectId,
     image: String,
     quantity: Number,
     medicine_name: String,
-    concentartion: String,
+    concentration: String,
     expire_date: Date,
-    user_id: mongoose.Schema.Types.ObjectId,
-    review_id: mongoose.Schema.Types.ObjectId,
+    user_id: {
+        type: mongoose.ObjectId,
+        ref: 'Users'
+    },
+    review_id: {
+        type: mongoose.ObjectId,
+        ref: 'review'
+    },
 
-  
+
 }, { collection: 'donation' })
 
-const User = mongoose.model('donation', donationSchema)
+const donation = mongoose.model('donation', donationSchema)

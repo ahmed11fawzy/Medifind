@@ -13,9 +13,18 @@ const requestSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
-    req_date: Date,
-    doctor_id: mongoose.Schema.Types.ObjectId,
-    user_id: mongoose.Schema.Types.ObjectId
+    req_date: {
+        type: Date
+    },
+
+    doctor_id: {
+        type: mongoose.ObjectId,
+        ref: 'Doctor'
+    },
+    user_id: {
+        type: mongoose.ObjectId,
+        ref: 'Users'
+    },
 
 }, { collection: 'request' })
 
