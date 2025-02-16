@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { required } = require('../ajv/loginSchema')
+const { required } = require('../ajv/loginSchema')
 const requestSchema = new mongoose.Schema({
 
     req_name: {
@@ -7,6 +8,10 @@ const requestSchema = new mongoose.Schema({
         required: true
     },
     prescription_img: {
+        type: String,
+        // required: true
+    },
+    req_description: {
         type: String,
         // required: true
     },
