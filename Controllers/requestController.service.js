@@ -18,7 +18,8 @@ module.exports = {
 
     getRequests: async (req, res, next) => {
         try {
-            const data = await requestModel.find().populate('user_id').populate('doctor_id')
+            const data = await requestModel.find().populate('user_id')
+            // .populate('doctor_id')
             if (!data) {
                 throw new Error("something went wrong");
             }
@@ -26,6 +27,13 @@ module.exports = {
         } catch (error) {
             next(error)
         }
-    }
+    },
+
+    requestUpdated: async (req, res) => {
+        console.log(req.params);
+        await requestModel.updateOne({ _id: req.params.id }, { $set: req.body })
+
+        res.status(200).json({ message: "user updated" })
+    },
 }
 

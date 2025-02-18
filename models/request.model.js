@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { required } = require('../ajv/loginSchema')
+// const { required } = require('../ajv/loginSchema')
 const { required } = require('../ajv/loginSchema')
 const requestSchema = new mongoose.Schema({
 
@@ -23,14 +23,20 @@ const requestSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    examined: {
+        type: Boolean,
+        required: false
+    },
     req_date: {
         type: Date
+        
     },
+    
 
-    doctor_id: {
-        type: mongoose.ObjectId,
-        ref: 'Doctor'
-    },
+    // doctor_id: {
+    //     type: mongoose.ObjectId,
+    //     ref: 'Doctor'
+    // },
     user_id: {
         type: mongoose.ObjectId,
         ref: 'Users'
