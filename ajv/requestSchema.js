@@ -8,11 +8,13 @@ const requestSchema = {
         req_name: { type: 'string' },
         prescription_img: { type: 'string' },
         status: { type: 'boolean' },
+        examined: { type: 'boolean' },
         req_date: { type: 'string' },
-        doctor_id: { type: 'string' },
+        req_description: { type: 'string' }, //added
+        // doctor_id: { type: 'string' },
         user_id: { type: 'string' },
     },
-    required: ['req_name', 'prescription_img', 'req_date', 'doctor_id', 'user_id'],
+    required: ['req_name', 'req_description'],
     additionalProperties: false
 }
 

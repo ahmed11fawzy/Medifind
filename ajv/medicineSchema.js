@@ -5,13 +5,15 @@ const medicineSchema = {
     type: 'object',
     properties: {
         name: { type: 'string' },
-        image_path: { type: 'string' },
+        image_path: { type: 'string' }, //need to be required
         quantity: { type: 'number' },
         concentration: { type: 'string' },
         expire_date: { type: 'string' },
+        examine: { type: 'boolean' },
+        status: { type: 'boolean' },
         user_id: { type: 'string' },
     },
-    required: ['name', 'image_path', 'concentration', 'user_id'],
+    required: ['name','concentration'],
     additionalProperties: false
 }
 
