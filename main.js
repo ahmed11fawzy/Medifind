@@ -48,7 +48,9 @@ server.use((req, res, next) => {
 })
 // $2-middleware
 server.use((req, res, next) => {
-    console.log('Auth Mw 2');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Expose-Headers", "x-auth-token"); // Expose x-auth-token
     next()
 })
 

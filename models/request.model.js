@@ -33,10 +33,13 @@ const requestSchema = new mongoose.Schema({
     },
     
 
+
     // doctor_id: {
     //     type: mongoose.ObjectId,
     //     ref: 'Doctor'
     // },
+
+   
     user_id: {
         type: mongoose.ObjectId,
         ref: 'Users'
