@@ -18,8 +18,8 @@ const requestSchema = new mongoose.Schema({
     },
 
     doctor_id: {
-        type: mongoose.ObjectId,
-        ref: 'Doctor'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Doctors'
     },
     user_id: {
         type: mongoose.ObjectId,
