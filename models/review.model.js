@@ -9,10 +9,11 @@ const reviewSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
-    doctor_id: {
-        type: mongoose.ObjectId,
-        ref: 'doctors'
-    },
+    // doctor_id: {
+    //     type: mongoose.ObjectId,
+    //     ref: 'doctors'
+    // },
+    
     medicine_id: {
         type: mongoose.ObjectId,
         ref: 'medicine'

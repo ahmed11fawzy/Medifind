@@ -8,7 +8,7 @@ const medicineSchema = new mongoose.Schema({
     },
     image_path: {
         type: String,
-        required: true
+        // required: true
     },
     quantity: {
         type: Number,
@@ -16,10 +16,18 @@ const medicineSchema = new mongoose.Schema({
     },
     concentration: {
         type: String,
-        required: true
+        // required: true
     },
     expire_date: {
         type: Date,
+        required: false
+    },
+    examine: {
+        type: Boolean,
+        required: false
+    },
+    status: {
+        type: Boolean,
         required: false
     },
     user_id: {
