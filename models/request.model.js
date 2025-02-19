@@ -5,19 +5,12 @@ const requestSchema = new mongoose.Schema({
 
     req_name: {
         type: String,
-        required: true
     },
     prescription_img: {
         type: String,
-        // required: true
     },
     req_description: {
         type: String,
-        // required: true
-    },
-    req_description: {
-        type: String,
-        required: true
     },
     status: {
         type: Boolean,
@@ -28,23 +21,21 @@ const requestSchema = new mongoose.Schema({
         required: false
     },
     req_date: {
-        type: Date
-        
+        type: Date,
+        default: Date.now
     },
-    
-
-
-    // doctor_id: {
-    //     type: mongoose.ObjectId,
-    //     ref: 'Doctor'
-    // },
-
-   
+    medicine: {
+        type: mongoose.ObjectId,
+        ref: 'Medicine'
+    },
+    doctor: {
+        type: mongoose.ObjectId,
+        ref: 'Users'
+    },
     user_id: {
         type: mongoose.ObjectId,
         ref: 'Users'
     },
-
 }, { collection: 'request' })
 
 const Request = mongoose.model('request', requestSchema)

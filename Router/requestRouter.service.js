@@ -1,8 +1,10 @@
 const express = require('express')
 const requestRouter = express.Router()
 const { requestValidation } = require('../Validators/requestValidation/requestValidation.js')
-const { createRequest, getRequests , requestUpdated} = require('../Controllers/requestController.service.js')
+const { createRequest, getAllRequests, getRequests, requestUpdated, deleteRequest } = require('../Controllers/requestController.service.js')
 requestRouter.post('/request', requestValidation, createRequest)
-             .get('/request', getRequests)
-             .patch('/request/:id', requestUpdated)
+    .get('/request', getAllRequests)
+    .get('/request/:userid', getRequests)
+    .patch('/request/:id', requestUpdated)
+    .delete('/request/', deleteRequest)
 module.exports = requestRouter

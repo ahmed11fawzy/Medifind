@@ -9,7 +9,7 @@ module.exports = {
             if (!data) {
                 throw new Error("something went wrong");
             }
-            res.status(200).json("your request has been sent")
+            res.status(200).json({ data: "your request has been sent successfully" })
 
         } catch (error) {
             next(error)
@@ -18,7 +18,19 @@ module.exports = {
 
     getRequests: async (req, res, next) => {
         try {
-            const data = await requestModel.find().populate('user_id')
+            const data = await requestModel.find({ user_id: req.params.userid }).populate('user_id').populate('medicine')
+            // .populate('doctor_id')
+            if (!data) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ data: data })
+        } catch (error) {
+            next(error)
+        }
+    },
+    getAllRequests: async (req, res, next) => {
+        try {
+            const data = await requestModel.find().populate('user_id').populate('medicine')
             // .populate('doctor_id')
             if (!data) {
                 throw new Error("something went wrong");
@@ -35,5 +47,23 @@ module.exports = {
 
         res.status(200).json({ message: "user updated" })
     },
+
+
+    deleteRequest: async (req, res, next) => {
+        console.log(req.headers.req_id);
+        console.log(req.headers.user_id);
+        console.log(req.params);
+        try {
+            const result = await requestModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
+            if (!result) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ message: "request is deleted" })
+        }
+        catch (err) {
+            next(err)
+        }
+
+    }
 }
 
