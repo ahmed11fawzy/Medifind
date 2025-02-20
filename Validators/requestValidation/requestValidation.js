@@ -7,6 +7,7 @@ module.exports = {
         (req, res, next) => {
             const isValid = ajv.validate(requestSchema, req.body);
             if (!isValid) {
+                console.log(ajv.errorsText());
                 next(new Error(ajv.errorsText()));
             }
             next();
