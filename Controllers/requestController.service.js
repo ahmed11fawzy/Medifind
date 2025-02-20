@@ -1,11 +1,13 @@
 const requestModel = require('../models/request.model.js')
+const ordersModel = require('../models/orders.model.js')
+
 
 
 
 module.exports = {
-    createRequest: async (req, res) => {
+    createorders: async (req, res,next) => {
         try {
-            const data = await requestModel.create(req.body)
+            const data = await ordersModel.create(req.body)
             if (!data) {
                 throw new Error("something went wrong");
             }
@@ -35,13 +37,13 @@ module.exports = {
             if (!data) {
                 throw new Error("something went wrong");
             }
-            res.status(200).json({ data: data })
+            res.status(200).json({ data: data }) 
         } catch (error) {
             next(error)
         }
     },
 
-    requestUpdated: async (req, res) => {
+    requestUpdated: async (req, res,next) => {
         console.log(req.params);
         await requestModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
