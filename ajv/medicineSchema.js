@@ -13,8 +13,8 @@ const medicineSchema = {
         status: { type: 'boolean' },
         user_id: { type: 'string' },
     },
-    required: ['name','concentration'],
-    additionalProperties: false
+    required: ['name', 'concentration'],
+    additionalProperties: true
 }
 
 ajv.compile(medicineSchema)
