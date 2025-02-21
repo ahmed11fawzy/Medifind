@@ -11,7 +11,7 @@ const reviewSchema = {
         medicine_id: { type: 'string' },
     },
     required: ['status', 'examined' ],       
-    additionalProperties: false
+    additionalProperties: true,
 }
 
 ajv.compile(reviewSchema)

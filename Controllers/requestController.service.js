@@ -5,7 +5,19 @@ const ordersModel = require('../models/orders.model.js')
 
 
 module.exports = {
-    createorders: async (req, res,next) => {
+    createOrders: async (req, res,next) => {
+        try {
+            const data = await ordersModel.create(req.body)
+            if (!data) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ data: "your request has been sent successfully" })
+
+        } catch (error) {
+            next(error)
+        }
+    },
+    createRequests: async (req, res,next) => {
         try {
             const data = await ordersModel.create(req.body)
             if (!data) {

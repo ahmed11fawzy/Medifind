@@ -9,6 +9,7 @@ const requestSchema = {
         prescription_img: { type: 'string' },
         status: { type: 'boolean' },
         examined: { type: 'boolean' },
+        requested: { type: 'boolean' },
         req_description: { type: 'string' },
         medicine: { type: 'string' },
         user_id: { type: 'string' },

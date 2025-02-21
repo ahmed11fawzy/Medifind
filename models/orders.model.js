@@ -18,6 +18,10 @@ const orderSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    requested: {
+        type: Boolean,
+        required: false
+    },
     req_date: {
         type: Date,
         default: Date.now
