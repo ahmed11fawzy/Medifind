@@ -43,7 +43,7 @@ module.exports = {
 
         const user = await userModel.findOne({ email: req.body.email })
         console.log(user);
-        let token = jwt.sign({ id: user._id }, 'secret')
+        let token = jwt.sign({ id: user._id, role: user.role }, 'secret')
         res.header('x-auth-token', token)
         res.json({ msg: "logged in successfully" })
 

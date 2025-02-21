@@ -3,7 +3,7 @@ const Ajv = require('ajv').default
 const ajv = new Ajv()
 
 module.exports = {
-    requestValidation: [
+    requestValidation:
         (req, res, next) => {
             const isValid = ajv.validate(requestSchema, req.body);
             if (!isValid) {
@@ -12,5 +12,5 @@ module.exports = {
             }
             next();
         }
-    ]
+
 }

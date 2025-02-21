@@ -1,7 +1,5 @@
 const requestModel = require('../models/request.model.js')
-const ordersModel = require('../models/orders.model.js')
-
-
+const orderModel = require('../models/orders.model.js')
 
 
 module.exports = {
@@ -19,7 +17,19 @@ module.exports = {
     },
     createRequests: async (req, res,next) => {
         try {
-            const data = await ordersModel.create(req.body)
+            const data = await orderModel.create(req.body)
+            if (!data) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ data: "your request has been sent successfully" })
+
+        } catch (error) {
+            next(error)
+        }
+    },
+    createRequest: async (req, res) => {
+        try {
+            const data = await requestModel.create(req.body)
             if (!data) {
                 throw new Error("something went wrong");
             }
@@ -49,13 +59,13 @@ module.exports = {
             if (!data) {
                 throw new Error("something went wrong");
             }
-            res.status(200).json({ data: data }) 
+            res.status(200).json({ data: data })
         } catch (error) {
             next(error)
         }
     },
 
-    requestUpdated: async (req, res,next) => {
+    requestUpdated: async (req, res) => {
         console.log(req.params);
         await requestModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
@@ -66,7 +76,7 @@ module.exports = {
     deleteRequest: async (req, res, next) => {
         console.log(req.headers.req_id);
         console.log(req.headers.user_id);
-        console.log(req.params);
+
         try {
             const result = await requestModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
             if (!result) {
