@@ -11,6 +11,7 @@ module.exports = {
         (req, res, next) => {
             const isValid = ajv.validate(medicineSchema, req.body);
             if (!isValid) {
+                console.log(ajv.errorsText());
                 next(new Error(ajv.errorsText()));
             }
             next();

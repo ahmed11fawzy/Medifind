@@ -81,7 +81,7 @@ module.exports = {
     },
     deleteMedicine: async (req, res, next) => {
         try {
-            const medicines = await medicineModel.deleteOne({ _id: req.params.med_id, user_id: req.headers.user_id })
+            const medicines = await medicineModel.deleteOne({ user_id: req.params.user_id, _id: req.headers.req_id })
             if (!medicines) {
                 throw new Error('something went wrong')
             }

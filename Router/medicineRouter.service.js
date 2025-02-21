@@ -8,7 +8,7 @@ medicineRouter.post("/medicine", medicineDataValidation, createMedicine)
     .get("/medicine/:id", getUserAddedMedicine)
     .get("/added", auth_privilege, getAllNotExamineMedicine)
     .patch("/medicine/:id", medicineUpdated)
-    .delete("/medicine/:med_id", deleteMedicine)
+    .delete("/medicine/:user_id", deleteMedicine)
 
 
 
