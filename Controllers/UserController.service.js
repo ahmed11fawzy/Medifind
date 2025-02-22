@@ -48,6 +48,16 @@ module.exports = {
         res.json({ msg: "logged in successfully" })
 
 
-    }
+    },
+    getUser: (req, res, next) => {
+        userModel.find({ _id: req.params.id })
+            .then((users) => {
+                console.log(users);
+                res.status(200).json({ data: users })
+            })
+            .catch((err) => {
+                next(err)
+            })
+    },
 }
 
