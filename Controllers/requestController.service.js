@@ -5,7 +5,7 @@ const orderModel = require('../models/orders.model.js')
 module.exports = {
     createOrders: async (req, res,next) => {
         try {
-            const data = await ordersModel.create(req.body)
+            const data = await orderModel.create(req.body)
             if (!data) {
                 throw new Error("something went wrong");
             }
@@ -64,10 +64,28 @@ module.exports = {
             next(error)
         }
     },
+    getAllOrders : async (req, res, next) => {
+        try {
+            const data = await orderModel.find().populate('user_id')
+            // .populate('doctor_id')
+            if (!data) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ data: data })
+        } catch (error) {
+            next(error)
+        }
+    },
 
-    requestUpdated: async (req, res) => {
+    requestUpdated: async (req, res,next) => {
         console.log(req.params);
         await requestModel.updateOne({ _id: req.params.id }, { $set: req.body })
+
+        res.status(200).json({ message: "user updated" })
+    },
+    orderUpdated: async (req, res,next) => {
+        console.log(req.params);
+        await orderModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
         res.status(200).json({ message: "user updated" })
     },
