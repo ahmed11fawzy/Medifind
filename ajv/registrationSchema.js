@@ -10,7 +10,7 @@ const RegisterSchema = {
         location: { type: 'string' },
         ssn: { type: 'number' },
         phone: { type: 'number' },
-
+        
 
     },
     required: ['name', 'email', 'password',],
