@@ -27,7 +27,7 @@ module.exports = {
             next(error)
         }
     },
-    createRequest: async (req, res) => {
+    createRequest: async (req, res,next) => {
         try {
             const data = await requestModel.create(req.body)
             if (!data) {
@@ -44,6 +44,17 @@ module.exports = {
         try {
             const data = await requestModel.find({ user_id: req.params.userid }).populate('user_id').populate('medicine')
             // .populate('doctor_id')
+            if (!data) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ data: data })
+        } catch (error) {
+            next(error)
+        }
+    },
+    getOrders: async (req, res, next) => {
+        try {
+            const data = await orderModel.find({ user_id: req.params.userid }).populate('user_id')
             if (!data) {
                 throw new Error("something went wrong");
             }

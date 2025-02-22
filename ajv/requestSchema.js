@@ -15,7 +15,7 @@ const requestSchema = {
         user_id: { type: 'string' },
     },
     required: ['medicine', 'user_id'],
-    additionalProperties: false
+    additionalProperties: true
 }
 
 

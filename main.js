@@ -39,6 +39,7 @@ mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongod
 
 // $1-middleware   // Allow all origins
 
+// Incorrect way (current)
 server.use((req, res, next) => {
     cors({
         exposedHeaders: ["x-auth-token"],
@@ -46,6 +47,17 @@ server.use((req, res, next) => {
     console.log('logging Mw 1');
     next()
 })
+
+// Correct way
+server.use(cors({
+    exposedHeaders: ["x-auth-token"],
+}));
+
+server.use((req, res, next) => {
+    console.log('logging Mw 1');
+    next();
+});
+
 // $2-middleware
 server.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
