@@ -90,5 +90,32 @@ module.exports = {
         catch (error) {
             next(error)
         }
+    },
+
+    decrementQuantity: async (req, res, next) => {
+  try {
+    const result = await medicineModel.findOneAndUpdate(
+      { name: req.params.name, quantity: { $gt: 0 } },
+      { $inc: { quantity: -1 } },
+      { new: true }
+    );
+    
+    if (!result) {
+      return res.status(400).json({ 
+        message: "Medicine not found or quantity already zero" 
+      });
     }
+    
+    if (result.quantity === 0) {
+      await medicineModel.updateOne(
+        { _id: result._id },
+        { examine: true }
+      );
+    }
+    
+    res.status(200).json({ message: "Quantity decremented" });
+  } catch (error) {
+    next(error);
+  }
+}
 }
