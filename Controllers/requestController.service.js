@@ -3,7 +3,7 @@ const orderModel = require('../models/orders.model.js')
 
 
 module.exports = {
-    createOrders: async (req, res,next) => {
+    createOrders: async (req, res, next) => {
         try {
             const data = await orderModel.create(req.body)
             if (!data) {
@@ -15,7 +15,7 @@ module.exports = {
             next(error)
         }
     },
-    createRequests: async (req, res,next) => {
+    createRequests: async (req, res, next) => {
         try {
             const data = await orderModel.create(req.body)
             if (!data) {
@@ -27,7 +27,7 @@ module.exports = {
             next(error)
         }
     },
-    createRequest: async (req, res,next) => {
+    createRequest: async (req, res, next) => {
         try {
             const data = await requestModel.create(req.body)
             if (!data) {
@@ -75,7 +75,7 @@ module.exports = {
             next(error)
         }
     },
-    getAllOrders : async (req, res, next) => {
+    getAllOrders: async (req, res, next) => {
         try {
             const data = await orderModel.find().populate('user_id')
             // .populate('doctor_id')
@@ -88,13 +88,13 @@ module.exports = {
         }
     },
 
-    requestUpdated: async (req, res,next) => {
+    requestUpdated: async (req, res, next) => {
         console.log(req.params);
         await requestModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
         res.status(200).json({ message: "user updated" })
     },
-    orderUpdated: async (req, res,next) => {
+    orderUpdated: async (req, res, next) => {
         console.log(req.params);
         await orderModel.updateOne({ _id: req.params.id }, { $set: req.body })
 
@@ -108,6 +108,22 @@ module.exports = {
 
         try {
             const result = await requestModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
+            if (!result) {
+                throw new Error("something went wrong");
+            }
+            res.status(200).json({ message: "request is deleted" })
+        }
+        catch (err) {
+            next(err)
+        }
+
+    },
+    deleteOrders: async (req, res, next) => {
+        console.log(req.headers.req_id);
+        console.log(req.headers.user_id);
+
+        try {
+            const result = await orderModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
             if (!result) {
                 throw new Error("something went wrong");
             }
