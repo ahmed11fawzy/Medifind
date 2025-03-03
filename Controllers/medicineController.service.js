@@ -90,5 +90,17 @@ module.exports = {
         catch (error) {
             next(error)
         }
+    },
+    getAcceptedMedicines: async (req, res, next) => {
+        try {
+            const medicines = await medicineModel.find({ status: true }).populate('user_id')
+            if (!medicines) {
+                throw new Error('something went wrong')
+            }
+            res.status(200).json({ data: medicines })
+        }
+        catch (error) {
+            next(error)
+        }
     }
 }
