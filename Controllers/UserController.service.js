@@ -43,10 +43,15 @@ module.exports = {
 
         const user = await userModel.findOne({ email: req.body.email })
         console.log(user);
+
+        if (!user) {            //go to Error middleware if user not found(not registered)
+            next(new Error('user not found'))
+        }
+        else{
         let token = jwt.sign({ id: user._id, role: user.role }, 'secret')
         res.header('x-auth-token', token)
         res.json({ msg: "logged in successfully" })
-
+        }
 
     }
 }
