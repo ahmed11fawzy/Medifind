@@ -11,10 +11,7 @@ medicineRouter.post("/medicine", medicineDataValidation, createMedicine)
     .get("/added", auth_privilege, getAllNotExamineMedicine)
     .patch("/medicine/:id", medicineUpdated)
     .delete("/medicine/:user_id", deleteMedicine)
-
     .get("/acceptedMedicine", getAcceptedMedicines)
-
-
     .patch("/medicine/decrement/:name", decrementQuantity);
 
 
