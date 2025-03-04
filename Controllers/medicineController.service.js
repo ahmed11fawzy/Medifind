@@ -92,6 +92,19 @@ module.exports = {
         }
     },
 
+    getAcceptedMedicines: async (req, res, next) => {
+        try {
+            const medicines = await medicineModel.find({ status: true }).populate('user_id')
+            if (!medicines) {
+                throw new Error('something went wrong')
+            }
+            res.status(200).json({ data: medicines })
+        }
+        catch (error) {
+            next(error)
+        },
+
+
     decrementQuantity: async (req, res, next) => {
   try {
     const result = await medicineModel.findOneAndUpdate(
@@ -111,6 +124,7 @@ module.exports = {
         { _id: result._id },
         { examine: true }
       );
+
     }
     
     res.status(200).json({ message: "Quantity decremented" });
