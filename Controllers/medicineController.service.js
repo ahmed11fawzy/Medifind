@@ -102,7 +102,8 @@ module.exports = {
         }
         catch (error) {
             next(error)
-        },
+        }
+    },
 
 
     decrementQuantity: async (req, res, next) => {
