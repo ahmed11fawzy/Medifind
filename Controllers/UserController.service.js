@@ -11,7 +11,7 @@ module.exports = {
     getUsers: (req, res, next) => {
         userModel.find()
             .then((users) => {
-                console.log(users);
+
                 res.status(200).json({ data: users })
             })
             .catch((err) => {
@@ -40,19 +40,31 @@ module.exports = {
         res.status(200).json({ message: "user updated" })
     },
     getSpecificUser: async (req, res, next) => {
-
-        const user = await userModel.findOne({ email: req.body.email })
-        console.log(user);
-
-        if (!user) {            //go to Error middleware if user not found(not registered)
-            next(new Error('user not found'))
+        try {
+            const user = await userModel.findOne({ email: req.body.email })
+            console.log(user);
+            if (!user) {
+                throw new Error('user not found')
+            }
+            let token = jwt.sign({ id: user._id, role: user.role }, 'secret')
+            res.status(200)
+            res.header('x-auth-token', token)
+            res.json({ msg: "logged in successfully" })
         }
-        else{
-        let token = jwt.sign({ id: user._id, role: user.role }, 'secret')
-        res.header('x-auth-token', token)
-        res.json({ msg: "logged in successfully" })
+        catch (err) {
+            next(err)
         }
 
-    }
+    },
+    getUser: (req, res, next) => {
+        userModel.find({ _id: req.params.id })
+            .then((users) => {
+
+                res.status(200).json({ data: users })
+            })
+            .catch((err) => {
+                next(err)
+            })
+    },
 }
 

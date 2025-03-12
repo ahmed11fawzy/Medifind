@@ -57,6 +57,10 @@ const userSchema = new mongoose.Schema({
             message: 'Invalid phone number format'
         }
     },
+     profileImage: {
+        type: String,
+        // required: true
+    },
 }, { collection: 'Users' })
 
 const Users = mongoose.model('Users', userSchema)
