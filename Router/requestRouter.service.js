@@ -9,7 +9,7 @@ requestRouter.post('/orders', createOrders)
     .get('/request', getAllRequests)
     .get('/request/:userid', getRequests)
     .patch('/request/:id' , requestUpdated)    //  deleted the validator
-    .delete('/request/', deleteRequest)
-    .delete('/orders/', deleteOrders)
+    .delete('/request/:user_id', deleteRequest)
+    .delete('/orders/:user_id', deleteOrders)
     .post('/request', requestValidation, createRequest)
 module.exports = requestRouter

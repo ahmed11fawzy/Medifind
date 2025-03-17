@@ -102,12 +102,28 @@ module.exports = {
     },
 
 
-    deleteRequest: async (req, res, next) => {
+
+    deleteMedicine: async (req, res, next) => {
+        try {
+            const medicines = await medicineModel.deleteOne({ user_id: req.params.user_id, _id: req.headers.req_id })
+            if (!medicines) {
+                throw new Error('something went wrong')
+            }
+            res.status(200).json({ data: medicines })
+        }
+        catch (error) {
+            next(error)
+        }
+    },
+
+
+
+    deleteRequest: async (req, res, next) => {                                   
         console.log(req.headers.req_id);
-        console.log(req.headers.user_id);
+        console.log(req.params.user_id);
 
         try {
-            const result = await requestModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
+            const result = await requestModel.deleteOne({ user_id: req.params.user_id, _id:req.headers.req_id })
             if (!result) {
                 throw new Error("something went wrong");
             }
@@ -120,10 +136,10 @@ module.exports = {
     },
     deleteOrders: async (req, res, next) => {
         console.log(req.headers.req_id);
-        console.log(req.headers.user_id);
+        console.log(req.params.user_id,);
 
         try {
-            const result = await orderModel.deleteOne({ _id: req.headers.req_id, user_id: req.headers.user_id })
+            const result = await orderModel.deleteOne({ _id: req.headers.req_id,user_id: req.params.user_id,})
             if (!result) {
                 throw new Error("something went wrong");
             }
