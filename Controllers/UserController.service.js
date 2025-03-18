@@ -2,7 +2,7 @@ const User = require('../models/userModel.js')
 const userModel = require('../models/userModel.js')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
+require('dotenv').config()
 module.exports = {
     getHomePage: (req, res) => {
         res.json({ data: "home page" })
@@ -46,7 +46,7 @@ module.exports = {
             if (!user) {
                 throw new Error('user not found')
             }
-            let token = jwt.sign({ id: user._id, role: user.role }, 'secret')
+            let token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET)
             res.status(200)
             res.header('x-auth-token', token)
             res.json({ msg: "logged in successfully" })

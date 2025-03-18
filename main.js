@@ -1,54 +1,33 @@
+require('dotenv').config()
 const express = require('express')
 const Router = require('./Router/UserRouter.service.js')
 const server = express()
 const mongoose = require('mongoose')
-const cors = require('cors');
-
-server.use(cors());
-
-
-
 const medicineRouter = require('./Router/medicineRouter.service.js')
 const requestRouter = require('./Router/requestRouter.service.js')
 const reviewRouter = require('./Router/reviewRouter.service.js')
+const cors = require('cors');
+const compression = require('compression')
 server.use(cors())
-mongoose.connect('mongodb+srv://af6394158:k7CaJle7ibhA1wcW@medifind.zasc3.mongodb.net/MediFind').then(async (data) => {
-    console.log('db connected');
-    const collections = await data.connection.db.listCollections().toArray();
-    // console.log(collections);
-    server.listen(7777, () => {
-        console.log('server is running on port 7777');
-    })
+server.use(compression())
+mongoose.connect(process.env.MONGODB_URI)
+    .then(async (data) => {
+        console.log('db connected');
+        const collections = await data.connection.db.listCollections().toArray();
+        // console.log(collections);
+        const port = process.env.PORT || 4000
+        server.listen(port, () => {
+            console.log('server is running on port ', port);
+        })
 
-})
+    })
     .catch((err) => {
         console.log(err);
     })
 
-
-
-
-
-
-
 // Handle server middleware
-
-
-
-
-
 // $1-middleware   // Allow all origins
 
-// Incorrect way (current)
-server.use((req, res, next) => {
-    cors({
-        exposedHeaders: ["x-auth-token"],
-    })
-    console.log('logging Mw 1');
-    next()
-})
-
-// Correct way
 server.use(cors({
     exposedHeaders: ["x-auth-token"],
 }));
