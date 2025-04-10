@@ -147,7 +147,7 @@ module.exports = {
     searchMedicine:async(req,res,next)=>{
        try {
         const {query}=req.query;
-        const medicines = await medicineModel.find({ name: { $regex:`^${query}`, $options: "i" } })
+        const medicines = await medicineModel.find({ name: { $regex:`^${query}`, $options: "i" }, status: true }).populate('user_id')
         if(!medicines){
             throw new Error('something went wrong')
         }
