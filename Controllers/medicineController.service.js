@@ -94,11 +94,22 @@ module.exports = {
 
     getAcceptedMedicines: async (req, res, next) => {
         try {
-            const medicines = await medicineModel.find({ status: true }).populate('user_id')
+            const {page=1 , limit=5} =req.query
+            const skip = (page - 1) * limit
+
+            const medicines = await medicineModel.find({ status: true })
+                                                .populate('user_id')
+                                                .skip(skip).limit(Number(limit))
+            const totalItems = await medicineModel.countDocuments({ status: true })
             if (!medicines) {
                 throw new Error('something went wrong')
             }
-            res.status(200).json({ data: medicines })
+            res.status(200).json({ 
+                totalItems,
+                currentPage:page,
+                totalPage:Math.ceil(totalItems/limit),
+                data: medicines 
+            })
         }
         catch (error) {
             next(error)
@@ -132,5 +143,18 @@ module.exports = {
   } catch (error) {
     next(error);
   }
-}
+    },
+    searchMedicine:async(req,res,next)=>{
+       try {
+        const {query}=req.query;
+        const medicines = await medicineModel.find({ name: { $regex:`^${query}`, $options: "i" } })
+        if(!medicines){
+            throw new Error('something went wrong')
+        }
+        res.status(200).json({ data: medicines })
+    }
+    catch (error) {
+        next(error)
+    }
+    }
 }

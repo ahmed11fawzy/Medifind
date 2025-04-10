@@ -38,5 +38,7 @@ const medicineSchema = new mongoose.Schema({
 }, { collection: 'medicine' })
 
 const Medicine = mongoose.model('Medicine', medicineSchema)
-
+Medicine.collection.createIndex({ name: 'text', concentration: 'text' ,status: 'text' })
+.then(() => console.log('Text index created successfully'))
+.catch((err) => console.error('Error creating text index:', err));
 module.exports = Medicine;
