@@ -97,7 +97,7 @@ module.exports = {
             const {page=1 , limit=5} =req.query
             const skip = (page - 1) * limit
 
-            const medicines = await medicineModel.find({ status: true })
+            const medicines = await medicineModel.find({ status: true ,expire_date: { $gt: new Date() } })
                                                 .populate('user_id')
                                                 .skip(skip).limit(Number(limit))
             const totalItems = await medicineModel.countDocuments({ status: true })
