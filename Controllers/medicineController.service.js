@@ -100,7 +100,10 @@ module.exports = {
             const medicines = await medicineModel.find({ status: true ,expire_date: { $gt: new Date() } })
                                                 .populate('user_id')
                                                 .skip(skip).limit(Number(limit))
-            const totalItems = await medicineModel.countDocuments({ status: true })
+            const totalItems = await medicineModel.countDocuments({
+              status: true,
+              expire_date: { $gt: new Date() },
+            });
             if (!medicines) {
                 throw new Error('something went wrong')
             }
